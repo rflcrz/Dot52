@@ -1,0 +1,8 @@
+//
+// Prefix header for all source files of the 'Dot52' target in the 'Dot52' project.
+//
+
+#ifdef __OBJC__
+    #import <Foundation/Foundation.h>
+    #import <AppKit/AppKit.h>
+#endif

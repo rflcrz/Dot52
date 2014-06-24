@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleExecutable</key>
+	<string>Dot52</string>
+	<key>CFBundleIconFile</key>
+	<string>Dot52.png</string>
+	<key>ToolbarIcon</key>
+	<string>Dot52.png</string>
+	<key>allowToolbarIcon</key>
+	<string>YES</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundlePackageType</key>
+	<string>BNDL</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>0.1</string>
+	<key>NSPrincipalClass</key>
+	<string>Dot52Filter</string>
+	<key>MenuTitles</key>
+	<array>
+		<string>Dot52</string>
+	</array>
+	<key>pluginType</key>
+	<string>roiTool</string>
+</dict>
+</plist>

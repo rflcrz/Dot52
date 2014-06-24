@@ -1,0 +1,6 @@
+/* Localized versions of Info.plist keys */
+
+CFBundleName = "Dot52";
+CFBundleShortVersionString = "1.0";
+CFBundleGetInfoString = "Dot52 version 1.0, Copyright (c) 2013 Rafael.";
+NSHumanReadableCopyright = "Copyright (c) 2013 Rafael.";
