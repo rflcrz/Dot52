@@ -16,7 +16,7 @@ float corrCoeff; // Will store the value of the selected correction coefficient.
 NSString *apRoiName; // Name to the ROI created with the "AP" button. Will be used as key for this ROI in dot52ManagedRois NSMutableDictionary.
 NSString *trvRoiName; // Name to the ROI created with the "TRV" button. Will be used as key for this ROI in dot52ManagedRois NSMutableDictionary.
 NSString *lonRoiName; // Name to the ROI created with the "LON" button. Will be used as key for this ROI in dot52ManagedRois NSMutableDictionary.
-Dot52RoiManager *dot52RoiManager; // Pointer to dot52RoiManager instance.
+Dot52RoiManager *dot52RoiManager; // Pointer to Dot52RoiManager sharedInstance.
 
 @implementation Dot52WindowController
 
@@ -29,7 +29,7 @@ Dot52RoiManager *dot52RoiManager; // Pointer to dot52RoiManager instance.
 @synthesize iconTrv;
 @synthesize iconLon;
 
-+ (id) getDot52Window {
++ (id) sharedInstance {
     static Dot52WindowController *dot52Window = nil;
     @synchronized(self) {
         if (dot52Window == nil)
@@ -62,7 +62,7 @@ Dot52RoiManager *dot52RoiManager; // Pointer to dot52RoiManager instance.
     apRoiName = @"Anteroposterior";
     trvRoiName = @"Transverse";
     lonRoiName = @"Longitudinal";
-    dot52RoiManager = [[Dot52RoiManager getDot52RoiManager] retain];
+    dot52RoiManager = [[Dot52RoiManager sharedInstance] retain];
     
     [resultText setStringValue:@"Set anteroposterior, tranverse and longitudinal diameters to estimate volume."];
     [buttonCopyResult setEnabled:NO];

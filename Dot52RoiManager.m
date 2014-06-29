@@ -8,6 +8,7 @@
 
 #import "Dot52RoiManager.h"
 
+Dot52WindowController *dot52WindowController; //  A pointer to the Dot52WindowController sharedInstance.
 
 @implementation Dot52RoiManager
 
@@ -18,7 +19,7 @@
 
 static Dot52RoiManager *dot52RoiManager = nil;
 
-+ (id) getDot52RoiManager {
++ (id) sharedInstance {
     @synchronized(self) {
         if (dot52RoiManager == nil)
             dot52RoiManager = [[self alloc] init];
@@ -30,6 +31,7 @@ static Dot52RoiManager *dot52RoiManager = nil;
 - (id) init {
     if (self = [super init]) {
         dot52ManagedRois = [[NSMutableDictionary alloc] init];
+        dot52WindowController = [Dot52WindowController sharedInstance];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newRoiCreated:) name:OsirixAddROINotification object:NULL];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(roiWasChanged:) name:OsirixROIChangeNotification object:NULL];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(roiWasDeleted:) name:OsirixRemoveROINotification object:NULL];
@@ -86,7 +88,7 @@ static Dot52RoiManager *dot52RoiManager = nil;
             [viewer setROIToolTag:roiType];
         }
         [[[ViewerController frontMostDisplayed2DViewer] window] makeKeyAndOrderFront:self]; // Makes viewer key window.
-        [[Dot52WindowController getDot52Window] updateResultText]; // Update pluginu interface.
+        [dot52WindowController updateResultText]; // Update pluginu interface.
     }
 }
 
@@ -103,7 +105,7 @@ static Dot52RoiManager *dot52RoiManager = nil;
         [newRoi setNSColor:dot52RoiColor globally:NO];
         NSLog(@"[Dot52] dot52ManagedRois ADDING: %@", newRoi.name);
         [dot52ManagedRois setObject:newRoi forKey:dot52RoiName];
-        [[Dot52WindowController getDot52Window] updateResultText]; // Update plugin interface.
+        [dot52WindowController updateResultText]; // Update plugin interface.
     }
 }
 
@@ -114,7 +116,7 @@ static Dot52RoiManager *dot52RoiManager = nil;
     NSLog(@"[Dot52] Notification CHANGED: %@", [changedRoi name]);
     
     if ([allKeysForRoi count] > 0) { //Check if the ROI is managed.
-        [[Dot52WindowController getDot52Window] updateResultText]; // Update plugin interface.
+        [dot52WindowController updateResultText]; // Update plugin interface.
     }
 }
 
@@ -129,7 +131,7 @@ static Dot52RoiManager *dot52RoiManager = nil;
             NSLog(@"[Dot52] dot52ManagedRois REMOVING: %@", [deletedRoi name]);
             [dot52ManagedRois removeObjectForKey:keyForRoi];
         }
-        [[Dot52WindowController getDot52Window] updateResultText]; // Update plugin interface.
+        [dot52WindowController updateResultText]; // Update plugin interface.
     }
 }
 
@@ -146,7 +148,7 @@ static Dot52RoiManager *dot52RoiManager = nil;
     dot52RoiType = nil;
     dot52RoiName = nil;
     dot52RoiColor = nil;
-    [[Dot52WindowController getDot52Window] updateResultText]; // Update plugin interface.
+    [dot52WindowController updateResultText]; // Update plugin interface.
 }
 
 - (void) deleteRoiWithName: (NSString*) roiName {

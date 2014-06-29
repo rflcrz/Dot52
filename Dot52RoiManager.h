@@ -11,7 +11,7 @@
 #import <OsiriXAPI/Notifications.h>
 
 /** "Kind of" a singleton class, but it may be released.
- Its object must be accessed by using getDot52RoiManager class method and the caller must retain it.
+ Its object must be accessed by using sharedInstance class method and the caller must retain it.
 **/
 @interface Dot52RoiManager : NSObject
 
@@ -28,14 +28,14 @@
 @property (strong, readonly) NSMutableDictionary *dot52ManagedRois;
 
 /*!
- The singleton getter.
+ This method returns the shared instance of Dot52RoiManager Class.
  Create the instance if not already created.
  Return the instance.
  Caller must retain the object (at this moment).
  Custom init method add instance as observer to OsiriX ROI notifications.
  Custom dealloc method removes observer.
  */
-+ (id) getDot52RoiManager;
++ (id) sharedInstance;
 
 - (void) searchForRoisToManage: (NSMutableArray*) arrayOfNames;
 

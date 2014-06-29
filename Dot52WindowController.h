@@ -30,7 +30,7 @@
 @property (assign) IBOutlet NSImageView *iconTrv; // Icon to give feedback of process of TRV ROI creation.
 @property (assign) IBOutlet NSImageView *iconLon; // Icon to give feedback of process of LON ROI creation.
 
-+ (id) getDot52Window;
++ (id) sharedInstance;
 
 - (IBAction)selectMethod:(NSPopUpButton *)sender;
 

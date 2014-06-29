@@ -16,7 +16,7 @@
 - (long) filterImage:(NSString*) menuName
 {
 	//Menu clicked.
-    [[Dot52WindowController getDot52Window] showWindow:nil];
+    [[Dot52WindowController sharedInstance] showWindow:nil];
     return 0;
 }
 
