@@ -72,44 +72,6 @@ Dot52RoiManager *dot52RoiManager; // Pointer to Dot52RoiManager sharedInstance.
     [self updateResultText];
 }
 
-- (IBAction)selectMethod:(NSPopUpButton *)sender {
-    switch ([sender indexOfSelectedItem]) {
-        case 0:
-            corrCoeff = M_PI/6;
-            break;
-        case 1:
-            corrCoeff = 0.625;
-            break;
-        case 2:
-            corrCoeff = 0.71;
-            break;
-        default:
-            corrCoeff = M_PI/6;
-            [sender selectItemAtIndex:0];
-            break;
-    }
-    [self updateResultText];
-}
-
-- (IBAction)buttonCreateApRoi:(NSButton *)sender {
-    [dot52RoiManager createRoiType:tMesure withName:apRoiName withColor:[NSColor blueColor]];
-}
-
-- (IBAction)buttonCreateTrvRoi:(NSButton *)sender {
-    [dot52RoiManager createRoiType:tMesure withName:trvRoiName withColor:[NSColor redColor]];
-}
-
-- (IBAction)buttonCreateLonRoi:(NSButton *)sender {
-    [dot52RoiManager createRoiType:tMesure withName:lonRoiName withColor:[NSColor yellowColor]];
-}
-
-- (IBAction)copyResult:(NSButton *)sender {
-    NSPasteboard *pasteBoard = [NSPasteboard generalPasteboard];
-    NSArray *types = [NSArray arrayWithObjects:NSStringPboardType, nil];
-    [pasteBoard declareTypes:types owner:self];
-    [pasteBoard setString:[resultText stringValue] forType:NSStringPboardType];
-}
-
 - (void) updateResultText {
     
     // Updating status icons of managed ROIs.
@@ -167,7 +129,8 @@ Dot52RoiManager *dot52RoiManager; // Pointer to Dot52RoiManager sharedInstance.
     }
     
     if (estimatedVolume > 0) {
-        [resultText setStringValue:[NSString stringWithFormat:@"Mede %.01f x %.01f x %.01f cm, com volume estimado em %.02f ml.", apRoiLength, trvRoiLength, lonRoiLength, estimatedVolume]];
+//        [resultText setStringValue:[NSString stringWithFormat:@"Mede %.01f x %.01f x %.01f cm, com volume estimado em %.02f ml.", apRoiLength, trvRoiLength, lonRoiLength, estimatedVolume]];
+        [resultText setStringValue:[NSString stringWithFormat:@"Measures %.01f x %.01f x %.01f cm, with an estimated volume of about %.02f ml.", apRoiLength, trvRoiLength, lonRoiLength, estimatedVolume]];
         [buttonCopyResult setEnabled:YES];
     } else {
         [resultText setStringValue:[NSString stringWithFormat:@"Set anteroposterior, tranverse and longitudinal diameters to estimate volume."]];
@@ -175,13 +138,64 @@ Dot52RoiManager *dot52RoiManager; // Pointer to Dot52RoiManager sharedInstance.
     }
 }
 
-// This method was created to get [roi MesureLength] avoiding exceptions.
+#pragma mark - IBActions
+// ---------------------------------------------------------------------------
+//  IBActions
+// ---------------------------------------------------------------------------
+- (IBAction)selectMethod:(NSPopUpButton *)sender {
+    switch ([sender indexOfSelectedItem]) {
+        case 0:
+            corrCoeff = M_PI/6;
+            break;
+        case 1:
+            corrCoeff = 0.625;
+            break;
+        case 2:
+            corrCoeff = 0.71;
+            break;
+        default:
+            corrCoeff = M_PI/6;
+            [sender selectItemAtIndex:0];
+            break;
+    }
+    [self updateResultText];
+}
+
+- (IBAction)buttonCreateApRoi:(NSButton *)sender {
+    [dot52RoiManager createRoiType:tMesure withName:apRoiName withColor:[NSColor blueColor]];
+}
+
+- (IBAction)buttonCreateTrvRoi:(NSButton *)sender {
+    [dot52RoiManager createRoiType:tMesure withName:trvRoiName withColor:[NSColor redColor]];
+}
+
+- (IBAction)buttonCreateLonRoi:(NSButton *)sender {
+    [dot52RoiManager createRoiType:tMesure withName:lonRoiName withColor:[NSColor yellowColor]];
+}
+
+- (IBAction)copyResult:(NSButton *)sender {
+    NSPasteboard *pasteBoard = [NSPasteboard generalPasteboard];
+    NSArray *types = [NSArray arrayWithObjects:NSStringPboardType, nil];
+    [pasteBoard declareTypes:types owner:self];
+    [pasteBoard setString:[resultText stringValue] forType:NSStringPboardType];
+}
+
+#pragma mark - Tweaks...
+// ---------------------------------------------------------------------------
+//  This method was created to get [roi MesureLength] avoiding exceptions.
+//
+//  * Check the number of points. Theres an exception when the user select and
+//  deletes a single point.
+//  * In this case we should not call [ROI MesureLength] before the ROI is
+//  completely deleted, because the ROI will still exists and this method will
+//  not check the number of points - raising an exception.
+// ---------------------------------------------------------------------------
 - (float) lengthForRoiName: (NSString*) roiName {
     NSDictionary *dot52ManagedRois = [dot52RoiManager dot52ManagedRois];
     ROI *roi = [dot52ManagedRois objectForKey:roiName];
     int numberOfPoints = [[roi points] count];
     float roiLength = 0;
-    if (numberOfPoints > 1) { // Check the number of points. Theres an exception when the user select and deletes a single point. In this case we should not call [ROI MesureLength] before the ROI is completely deleted, because the ROI will still exists and this method will not check the number of points - raising an exception.
+    if (numberOfPoints > 1) { // See comments.
         roiLength = [roi MesureLength:NULL];
     }
     
