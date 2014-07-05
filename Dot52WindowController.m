@@ -29,6 +29,16 @@ Dot52RoiManager *dot52RoiManager; // Pointer to Dot52RoiManager sharedInstance.
 @synthesize iconTrv;
 @synthesize iconLon;
 
+@synthesize customResultString;
+@synthesize resultString;
+@synthesize ApDiameterString;
+@synthesize TrvDiameterString;
+@synthesize LonDiameterString;
+
+#pragma mark - Class Methods
+// ---------------------------------------------------------------------------
+//  Class Methods
+// ---------------------------------------------------------------------------
 + (id) sharedInstance {
     static Dot52WindowController *dot52Window = nil;
     @synchronized(self) {
@@ -39,7 +49,12 @@ Dot52RoiManager *dot52RoiManager; // Pointer to Dot52RoiManager sharedInstance.
     return dot52Window;
 }
 
+#pragma mark - Instance Methods
+// ---------------------------------------------------------------------------
+//  Instance Methods
+// ---------------------------------------------------------------------------
 - (id)initWithWindow:(NSWindow *)window {
+    NSLog(@"Yes, was called!");
     self = [super initWithWindow:window];
     if (self) {
         // Initialization code here.
@@ -64,11 +79,15 @@ Dot52RoiManager *dot52RoiManager; // Pointer to Dot52RoiManager sharedInstance.
     lonRoiName = @"Longitudinal";
     dot52RoiManager = [[Dot52RoiManager sharedInstance] retain];
     
-    [resultText setStringValue:@"Set anteroposterior, tranverse and longitudinal diameters to estimate volume."];
+    [resultText setString:@"Set anteroposterior, tranverse and longitudinal diameters to estimate volume."];
     [buttonCopyResult setEnabled:NO];
     [textDiameterAp setStringValue:@"Set AP."];
     [textDiamaterTrv setStringValue:@"Set TRV."];
     [textDiamaterLon setStringValue:@"Set LON."];
+    
+    self.customResultString = [[NSMutableString alloc] initWithString:@"Measures @AP x @TRV x @LON cm, with an estimated volume of about @VOL ml."];
+    self.resultString = @"Set anteroposterior, tranverse and longitudinal diameters to estimate volume.";
+    
     [self updateResultText];
 }
 
@@ -128,13 +147,17 @@ Dot52RoiManager *dot52RoiManager; // Pointer to Dot52RoiManager sharedInstance.
         [textDiamaterLon setStringValue:@"Set LON."];
     }
     
-    if (estimatedVolume > 0) {
-//        [resultText setStringValue:[NSString stringWithFormat:@"Mede %.01f x %.01f x %.01f cm, com volume estimado em %.02f ml.", apRoiLength, trvRoiLength, lonRoiLength, estimatedVolume]];
-        [resultText setStringValue:[NSString stringWithFormat:@"Measures %.01f x %.01f x %.01f cm, with an estimated volume of about %.02f ml.", apRoiLength, trvRoiLength, lonRoiLength, estimatedVolume]];
-        [buttonCopyResult setEnabled:YES];
+    if ([[buttonCopyResult title] isEqualToString:@"Save"]) {
+        [resultText bind:@"value" toObject:self withKeyPath:@"customResultString" options:nil];
     } else {
-        [resultText setStringValue:[NSString stringWithFormat:@"Set anteroposterior, tranverse and longitudinal diameters to estimate volume."]];
-        [buttonCopyResult setEnabled:NO];
+        if (estimatedVolume > 0) {
+            //        [resultText setStringValue:[NSString stringWithFormat:@"Mede %.01f x %.01f x %.01f cm, com volume estimado em %.02f ml.", apRoiLength, trvRoiLength, lonRoiLength, estimatedVolume]];
+            [resultText setString:[NSString stringWithFormat:@"Measures %.01f x %.01f x %.01f cm, with an estimated volume of about %.02f ml.", apRoiLength, trvRoiLength, lonRoiLength, estimatedVolume]];
+            [buttonCopyResult setEnabled:YES];
+        } else {
+            [resultText setString:[NSString stringWithFormat:@"Set anteroposterior, tranverse and longitudinal diameters to estimate volume."]];
+            [buttonCopyResult setEnabled:NO];
+        }
     }
 }
 
@@ -142,7 +165,7 @@ Dot52RoiManager *dot52RoiManager; // Pointer to Dot52RoiManager sharedInstance.
 // ---------------------------------------------------------------------------
 //  IBActions
 // ---------------------------------------------------------------------------
-- (IBAction)selectMethod:(NSPopUpButton *)sender {
+- (IBAction)selectCoefficient:(NSPopUpButton *)sender {
     switch ([sender indexOfSelectedItem]) {
         case 0:
             corrCoeff = M_PI/6;
@@ -174,10 +197,23 @@ Dot52RoiManager *dot52RoiManager; // Pointer to Dot52RoiManager sharedInstance.
 }
 
 - (IBAction)copyResult:(NSButton *)sender {
-    NSPasteboard *pasteBoard = [NSPasteboard generalPasteboard];
-    NSArray *types = [NSArray arrayWithObjects:NSStringPboardType, nil];
-    [pasteBoard declareTypes:types owner:self];
-    [pasteBoard setString:[resultText stringValue] forType:NSStringPboardType];
+    if ([[buttonCopyResult title] isEqualToString:@"Copy Result"]) {
+        NSPasteboard *pasteBoard = [NSPasteboard generalPasteboard];
+        NSArray *types = [NSArray arrayWithObjects:NSStringPboardType, nil];
+        [pasteBoard declareTypes:types owner:self];
+        [pasteBoard setString:[resultText string] forType:NSStringPboardType];
+    }
+    if ([[buttonCopyResult title] isEqualToString:@"Save"]) {
+        [resultText setEditable:NO];
+        [buttonCopyResult setTitle:@"Copy Result"];
+        [self updateResultText];
+    }
+}
+
+- (IBAction)editResultText:(NSButton *)sender {
+    [resultText setEditable:YES];
+    [buttonCopyResult setTitle:@"Save"];
+    [self updateResultText];
 }
 
 #pragma mark - Tweaks...
