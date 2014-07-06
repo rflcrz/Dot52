@@ -22,9 +22,6 @@ Dot52RoiManager *dot52RoiManager; // Pointer to Dot52RoiManager sharedInstance.
 
 @synthesize resultText;
 @synthesize buttonCopyResult;
-@synthesize textDiameterAp;
-@synthesize textDiamaterTrv;
-@synthesize textDiamaterLon;
 @synthesize iconAp;
 @synthesize iconTrv;
 @synthesize iconLon;
@@ -79,12 +76,6 @@ Dot52RoiManager *dot52RoiManager; // Pointer to Dot52RoiManager sharedInstance.
     lonRoiName = @"Longitudinal";
     dot52RoiManager = [[Dot52RoiManager sharedInstance] retain];
     
-    [resultText setString:@"Set anteroposterior, tranverse and longitudinal diameters to estimate volume."];
-    [buttonCopyResult setEnabled:NO];
-    [textDiameterAp setStringValue:@"Set AP."];
-    [textDiamaterTrv setStringValue:@"Set TRV."];
-    [textDiamaterLon setStringValue:@"Set LON."];
-    
     self.customResultString = [[NSMutableString alloc] initWithString:@"Measures @AP x @TRV x @LON cm, with an estimated volume of about @VOL ml."];
     self.resultString = @"Set anteroposterior, tranverse and longitudinal diameters to estimate volume.";
     
@@ -130,21 +121,21 @@ Dot52RoiManager *dot52RoiManager; // Pointer to Dot52RoiManager sharedInstance.
     float estimatedVolume = apRoiLength * trvRoiLength * lonRoiLength * corrCoeff;
     
     if (apRoiLength > 0) {
-        [textDiameterAp setStringValue:[NSString stringWithFormat:@"= %.01f cm", apRoiLength]];
+        self.ApDiameterString = [NSString stringWithFormat:@"= %.01f cm", apRoiLength];
     } else {
-        [textDiameterAp setStringValue:@"Set AP."];
+        self.ApDiameterString = @"Set AP.";
     }
     
     if (trvRoiLength > 0) {
-        [textDiamaterTrv setStringValue:[NSString stringWithFormat:@"= %.01f cm", trvRoiLength]];
+        self.TrvDiameterString = [NSString stringWithFormat:@"= %.01f cm", trvRoiLength];
     } else {
-        [textDiamaterTrv setStringValue:@"Set TRV."];
+        self.TrvDiameterString = @"Set TRV.";
     }
     
     if (lonRoiLength > 0) {
-        [textDiamaterLon setStringValue:[NSString stringWithFormat:@"= %.01f cm", lonRoiLength]];
+        self.LonDiameterString = [NSString stringWithFormat:@"= %.01f cm", lonRoiLength];
     } else {
-        [textDiamaterLon setStringValue:@"Set LON."];
+        self.LonDiameterString = @"Set LON.";
     }
     
     if ([[buttonCopyResult title] isEqualToString:@"Save"]) {

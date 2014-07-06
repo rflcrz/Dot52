@@ -7,15 +7,11 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="Dot52WindowController">
             <connections>
-                <outlet property="TEste" destination="3Dw-Oc-d6H" id="VTT-VT-VGK"/>
                 <outlet property="buttonCopyResult" destination="fNF-qH-wyw" id="eXa-hu-0PO"/>
                 <outlet property="iconAp" destination="O8F-oe-G3G" id="Xvk-PX-QT2"/>
                 <outlet property="iconLon" destination="HRg-35-2uz" id="eni-WF-6ep"/>
                 <outlet property="iconTrv" destination="Xtg-72-iHx" id="pAs-ot-qSg"/>
                 <outlet property="resultText" destination="Km4-SI-D4q" id="Ua4-q5-s44"/>
-                <outlet property="textDiamaterLon" destination="3Dw-Oc-d6H" id="3As-eN-5jz"/>
-                <outlet property="textDiamaterTrv" destination="wma-Kh-PQj" id="9zE-ug-j2E"/>
-                <outlet property="textDiameterAp" destination="IkF-MC-Zad" id="29M-64-gdY"/>
                 <outlet property="window" destination="1" id="p2m-Us-tjh"/>
             </connections>
         </customObject>
@@ -112,6 +108,9 @@
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
+                                    <connections>
+                                        <binding destination="-2" name="value" keyPath="self.ApDiameterString" id="ZcC-p5-SkH"/>
+                                    </connections>
                                 </textField>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wma-Kh-PQj">
                                     <rect key="frame" x="63" y="42" width="79" height="17"/>
@@ -121,6 +120,9 @@
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
+                                    <connections>
+                                        <binding destination="-2" name="value" keyPath="self.TrvDiameterString" id="Tzh-Ty-G4e"/>
+                                    </connections>
                                 </textField>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Dw-Oc-d6H">
                                     <rect key="frame" x="63" y="16" width="79" height="17"/>
@@ -130,6 +132,9 @@
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
+                                    <connections>
+                                        <binding destination="-2" name="value" keyPath="self.LonDiameterString" id="zfg-Su-bCc"/>
+                                    </connections>
                                 </textField>
                             </subviews>
                         </view>
