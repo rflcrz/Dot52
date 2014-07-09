@@ -132,21 +132,21 @@ Dot52RoiManager *dot52RoiManager; // Pointer to Dot52RoiManager sharedInstance.
     float estimatedVolume = apRoiLength * trvRoiLength * lonRoiLength * corrCoeff;
     
     if (apRoiLength > 0) {
-        self.ApDiameterString = [NSString stringWithFormat:@"= %.01f cm", apRoiLength];
+        self.apDiameterString = [NSString stringWithFormat:@"= %.01f cm", apRoiLength];
     } else {
-        self.ApDiameterString = @"Set AP.";
+        self.apDiameterString = @"Set AP.";
     }
     
     if (trvRoiLength > 0) {
-        self.TrvDiameterString = [NSString stringWithFormat:@"= %.01f cm", trvRoiLength];
+        self.trvDiameterString = [NSString stringWithFormat:@"= %.01f cm", trvRoiLength];
     } else {
-        self.TrvDiameterString = @"Set TRV.";
+        self.trvDiameterString = @"Set TRV.";
     }
     
     if (lonRoiLength > 0) {
-        self.LonDiameterString = [NSString stringWithFormat:@"= %.01f cm", lonRoiLength];
+        self.lonDiameterString = [NSString stringWithFormat:@"= %.01f cm", lonRoiLength];
     } else {
-        self.LonDiameterString = @"Set LON.";
+        self.lonDiameterString = @"Set LON.";
     }
     
     if (estimatedVolume > 0) {
