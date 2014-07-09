@@ -110,7 +110,7 @@
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                     <connections>
-                                        <binding destination="-2" name="value" keyPath="self.ApDiameterString" id="ZcC-p5-SkH"/>
+                                        <binding destination="-2" name="value" keyPath="self.apDiameterString" id="8cf-Cz-BSP"/>
                                     </connections>
                                 </textField>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wma-Kh-PQj">
@@ -122,7 +122,7 @@
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                     <connections>
-                                        <binding destination="-2" name="value" keyPath="self.TrvDiameterString" id="Tzh-Ty-G4e"/>
+                                        <binding destination="-2" name="value" keyPath="self.trvDiameterString" id="Qmz-bl-3YM"/>
                                     </connections>
                                 </textField>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Dw-Oc-d6H">
@@ -134,7 +134,7 @@
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                     <connections>
-                                        <binding destination="-2" name="value" keyPath="self.LonDiameterString" id="zfg-Su-bCc"/>
+                                        <binding destination="-2" name="value" keyPath="self.lonDiameterString" id="i8f-TS-sGN"/>
                                     </connections>
                                 </textField>
                             </subviews>
