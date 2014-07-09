@@ -9,19 +9,19 @@
 #import <Cocoa/Cocoa.h>
 
 @interface Dot52WindowController : NSWindowController
-
 {
-    NSTextView *resultText;
-    NSButton *buttonCopyResult;
-    NSImageView *iconAp;
-    NSImageView *iconTrv;
-    NSImageView *iconLon;
+    NSTextView *_resultText;
+    NSButton *_buttonCopyResult;
+    NSImageView *_iconAp;
+    NSImageView *_iconTrv;
+    NSImageView *_iconLon;
+    NSPopover *_popover;
     
-    NSMutableString *customResultString;
-    NSString *resultString;
-    NSString *ApDiameterString;
-    NSString *TrvDiameterString;
-    NSString *LonDiameterString;
+    NSString *_customResultString;
+    NSString *_resultString;
+    NSString *_apDiameterString;
+    NSString *_trvDiameterString;
+    NSString *_lonDiameterString;
 }
 
 #pragma mark - IBOutlets
@@ -33,17 +33,18 @@
 @property (assign) IBOutlet NSImageView *iconAp; // Icon to give feedback of process of AP ROI creation.
 @property (assign) IBOutlet NSImageView *iconTrv; // Icon to give feedback of process of TRV ROI creation.
 @property (assign) IBOutlet NSImageView *iconLon; // Icon to give feedback of process of LON ROI creation.
+@property (assign) IBOutlet NSPopover *popover; // NSPopover to edit customResultString.
 
 
 #pragma mark - Class Properties
 // ---------------------------------------------------------------------------
 //  Class Properties
 // ---------------------------------------------------------------------------
-@property (strong) NSMutableString *customResultString; // Custom string, defined by the user, to create the text containing the results.
+@property (copy, nonatomic) NSString *customResultString; // Custom string, defined by the user, to create the text containing the results.
 @property (strong) NSString *resultString; // NSString to hold the result.
-@property (strong) NSString *ApDiameterString; // NSString to hold AP diameter.
-@property (strong) NSString *TrvDiameterString; // NSString to hold TRV diameter.
-@property (strong) NSString *LonDiameterString; // NSString to hold LON diameter.
+@property (strong) NSString *apDiameterString; // NSString to hold AP diameter.
+@property (strong) NSString *trvDiameterString; // NSString to hold TRV diameter.
+@property (strong) NSString *lonDiameterString; // NSString to hold LON diameter.
 
 
 #pragma mark - Class Methods
@@ -75,5 +76,7 @@
 - (IBAction)copyResult:(NSButton *)sender;
 
 - (IBAction)editResultText:(NSButton *)sender;
+
+- (IBAction)resetCustomResultString:(NSButton *)sender;
 
 @end

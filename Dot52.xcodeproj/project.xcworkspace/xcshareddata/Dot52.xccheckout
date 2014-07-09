@@ -12,6 +12,8 @@
 	<dict>
 		<key>53B50C5B-18DE-4174-96E5-96F595752196</key>
 		<string>https://github.com/rflcrz/Dot52.git</string>
+		<key>79BAEC10-C519-4F25-9414-A2292AF469FF</key>
+		<string>https://github.com/pixmeo/osirix.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Dot52.xcodeproj/project.xcworkspace</string>
@@ -19,6 +21,8 @@
 	<dict>
 		<key>53B50C5B-18DE-4174-96E5-96F595752196</key>
 		<string>../..</string>
+		<key>79BAEC10-C519-4F25-9414-A2292AF469FF</key>
+		<string>../../../osirix</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/rflcrz/Dot52.git</string>
@@ -35,6 +39,14 @@
 			<string>53B50C5B-18DE-4174-96E5-96F595752196</string>
 			<key>IDESourceControlWCCName</key>
 			<string>Dot52</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>79BAEC10-C519-4F25-9414-A2292AF469FF</string>
+			<key>IDESourceControlWCCName</key>
+			<string>osirix</string>
 		</dict>
 	</array>
 </dict>

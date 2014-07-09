@@ -9,9 +9,6 @@
 #import "Dot52WindowController.h"
 #import "Dot52RoiManager.h"
 
-//  Acho que tenho que usar _ pra nomear essas variaveis locais.
-//  Acho que tenho que usar um bloco @interface aqui também, já que essas variáveis vão ser usadas localmente.
-
 float corrCoeff; // Will store the value of the selected correction coefficient.
 NSString *apRoiName; // Name to the ROI created with the "AP" button. Will be used as key for this ROI in dot52ManagedRois NSMutableDictionary.
 NSString *trvRoiName; // Name to the ROI created with the "TRV" button. Will be used as key for this ROI in dot52ManagedRois NSMutableDictionary.
@@ -19,18 +16,19 @@ NSString *lonRoiName; // Name to the ROI created with the "LON" button. Will be 
 Dot52RoiManager *dot52RoiManager; // Pointer to Dot52RoiManager sharedInstance.
 
 @implementation Dot52WindowController
+@synthesize popover = _popover;
 
-@synthesize resultText;
-@synthesize buttonCopyResult;
-@synthesize iconAp;
-@synthesize iconTrv;
-@synthesize iconLon;
+@synthesize resultText = _resultText;
+@synthesize buttonCopyResult = _buttonCopyResult;
+@synthesize iconAp = _iconAp;
+@synthesize iconTrv = _iconTrv;
+@synthesize iconLon = _iconLon;
 
-@synthesize customResultString;
-@synthesize resultString;
-@synthesize ApDiameterString;
-@synthesize TrvDiameterString;
-@synthesize LonDiameterString;
+@synthesize customResultString = _customResultString;
+@synthesize resultString = _resultString;
+@synthesize apDiameterString = _apDiameterString;
+@synthesize trvDiameterString = _trvDiameterString;
+@synthesize lonDiameterString = _lonDiameterString;
 
 #pragma mark - Class Methods
 // ---------------------------------------------------------------------------
@@ -76,10 +74,23 @@ Dot52RoiManager *dot52RoiManager; // Pointer to Dot52RoiManager sharedInstance.
     lonRoiName = @"Longitudinal";
     dot52RoiManager = [[Dot52RoiManager sharedInstance] retain];
     
-    self.customResultString = [[NSMutableString alloc] initWithString:@"Measures @AP x @TRV x @LON cm, with an estimated volume of about @VOL ml."];
-    self.resultString = @"Set anteroposterior, tranverse and longitudinal diameters to estimate volume.";
-    
+    NSURL *pluginResourcesURL = [[NSBundle bundleForClass:[self class]] resourceURL];
+    NSURL *fileUrl = [pluginResourcesURL URLByAppendingPathComponent:@"customResultString.txt"];
+    self.customResultString = [NSString stringWithContentsOfURL:fileUrl encoding:NSUTF8StringEncoding error:nil];
+
     [self updateResultText];
+}
+
+// Custom setter to save customResultString to the customResultString.txt
+- (void)setCustomResultString:(NSString *)newString {
+    if (newString != _customResultString) {
+        [_customResultString release];
+        _customResultString = [newString copy];
+        
+        NSURL *pluginResourcesURL = [[NSBundle bundleForClass:[self class]] resourceURL];
+        NSURL *fileUrl = [pluginResourcesURL URLByAppendingPathComponent:@"customResultString.txt"];
+        [_customResultString writeToURL:fileUrl atomically:YES encoding:NSUTF8StringEncoding error:nil];
+    }
 }
 
 - (void) updateResultText {
@@ -91,30 +102,30 @@ Dot52RoiManager *dot52RoiManager; // Pointer to Dot52RoiManager sharedInstance.
     ROI *lonRoi = [[dot52RoiManager dot52ManagedRois] objectForKey:lonRoiName];
     
     if (apRoi) {
-        [iconAp setImage:[NSImage imageNamed:@"NSStatusAvailable"]];
+        [self.iconAp setImage:[NSImage imageNamed:@"NSStatusAvailable"]];
     } else if (roiBeingCreated == apRoiName) {
-        [iconAp setImage:[NSImage imageNamed:@"NSStatusPartiallyAvailable"]];
+        [self.iconAp setImage:[NSImage imageNamed:@"NSStatusPartiallyAvailable"]];
     } else {
-        [iconAp setImage:[NSImage imageNamed:@"NSStatusNone"]];
+        [self.iconAp setImage:[NSImage imageNamed:@"NSStatusNone"]];
     }
     
     if (trvRoi) {
-        [iconTrv setImage:[NSImage imageNamed:@"NSStatusAvailable"]];
+        [self.iconTrv setImage:[NSImage imageNamed:@"NSStatusAvailable"]];
     } else if (roiBeingCreated == trvRoiName) {
-        [iconTrv setImage:[NSImage imageNamed:@"NSStatusPartiallyAvailable"]];
+        [self.iconTrv setImage:[NSImage imageNamed:@"NSStatusPartiallyAvailable"]];
     } else {
-        [iconTrv setImage:[NSImage imageNamed:@"NSStatusNone"]];
+        [self.iconTrv setImage:[NSImage imageNamed:@"NSStatusNone"]];
     }
     
     if (lonRoi) {
-        [iconLon setImage:[NSImage imageNamed:@"NSStatusAvailable"]];
+        [self.iconLon setImage:[NSImage imageNamed:@"NSStatusAvailable"]];
     } else if (roiBeingCreated == lonRoiName) {
-        [iconLon setImage:[NSImage imageNamed:@"NSStatusPartiallyAvailable"]];
+        [self.iconLon setImage:[NSImage imageNamed:@"NSStatusPartiallyAvailable"]];
     } else {
-        [iconLon setImage:[NSImage imageNamed:@"NSStatusNone"]];
+        [self.iconLon setImage:[NSImage imageNamed:@"NSStatusNone"]];
     }
     
-    // Updating NSTextFields
+    // Updating NSTextFields and NSTextView
     float apRoiLength = [self lengthForRoiName:apRoiName];
     float trvRoiLength = [self lengthForRoiName:trvRoiName];
     float lonRoiLength = [self lengthForRoiName:lonRoiName];
@@ -138,18 +149,37 @@ Dot52RoiManager *dot52RoiManager; // Pointer to Dot52RoiManager sharedInstance.
         self.LonDiameterString = @"Set LON.";
     }
     
-    if ([[buttonCopyResult title] isEqualToString:@"Save"]) {
-        [resultText bind:@"value" toObject:self withKeyPath:@"customResultString" options:nil];
-    } else {
-        if (estimatedVolume > 0) {
-            //        [resultText setStringValue:[NSString stringWithFormat:@"Mede %.01f x %.01f x %.01f cm, com volume estimado em %.02f ml.", apRoiLength, trvRoiLength, lonRoiLength, estimatedVolume]];
-            [resultText setString:[NSString stringWithFormat:@"Measures %.01f x %.01f x %.01f cm, with an estimated volume of about %.02f ml.", apRoiLength, trvRoiLength, lonRoiLength, estimatedVolume]];
-            [buttonCopyResult setEnabled:YES];
-        } else {
-            [resultText setString:[NSString stringWithFormat:@"Set anteroposterior, tranverse and longitudinal diameters to estimate volume."]];
-            [buttonCopyResult setEnabled:NO];
+    if (estimatedVolume > 0) {
+        
+        NSString *stringToReplace; // I'm using this local string because resultString is bound to the user interface and I want to avoid updates on the user interface during the for loop below.
+        stringToReplace = self.customResultString;
+        
+        NSDictionary *replacements = [NSDictionary dictionaryWithObjectsAndKeys:
+                                      [self stringFromFloat:apRoiLength], @"@AP",
+                                      [self stringFromFloat:trvRoiLength], @"@TRV",
+                                      [self stringFromFloat:lonRoiLength], @"@LON",
+                                      [self stringFromFloat:estimatedVolume], @"@VOL",
+                                      nil];
+        
+        for (NSString *toReplace in replacements) {
+            stringToReplace = [stringToReplace stringByReplacingOccurrencesOfString:toReplace
+                                                                         withString:[replacements objectForKey:toReplace]];
         }
+        self.resultString = stringToReplace;
+        [self.buttonCopyResult setEnabled:YES];
+    } else {
+        self.resultString = @"Set anteroposterior, transverse and longitudinal diameters to estimate volume.";
+        [self.buttonCopyResult setEnabled:NO];
     }
+}
+
+- (NSString *) stringFromFloat:(float)myFloat {
+    NSNumber *floatNSNumber = [NSNumber numberWithFloat:myFloat];
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    [numberFormatter setMaximumFractionDigits:1];
+    NSString *floatString = [numberFormatter stringFromNumber:floatNSNumber];
+    return floatString;
 }
 
 #pragma mark - IBActions
@@ -188,23 +218,18 @@ Dot52RoiManager *dot52RoiManager; // Pointer to Dot52RoiManager sharedInstance.
 }
 
 - (IBAction)copyResult:(NSButton *)sender {
-    if ([[buttonCopyResult title] isEqualToString:@"Copy Result"]) {
-        NSPasteboard *pasteBoard = [NSPasteboard generalPasteboard];
-        NSArray *types = [NSArray arrayWithObjects:NSStringPboardType, nil];
-        [pasteBoard declareTypes:types owner:self];
-        [pasteBoard setString:[resultText string] forType:NSStringPboardType];
-    }
-    if ([[buttonCopyResult title] isEqualToString:@"Save"]) {
-        [resultText setEditable:NO];
-        [buttonCopyResult setTitle:@"Copy Result"];
-        [self updateResultText];
-    }
+    NSPasteboard *pasteBoard = [NSPasteboard generalPasteboard];
+    NSArray *types = [NSArray arrayWithObjects:NSStringPboardType, nil];
+    [pasteBoard declareTypes:types owner:self];
+    [pasteBoard setString:self.resultString forType:NSStringPboardType];
 }
 
 - (IBAction)editResultText:(NSButton *)sender {
-    [resultText setEditable:YES];
-    [buttonCopyResult setTitle:@"Save"];
-    [self updateResultText];
+    [self.popover showRelativeToRect:[self.resultText bounds] ofView:self.resultText preferredEdge:NSMinXEdge];
+}
+
+- (IBAction)resetCustomResultString:(NSButton *)sender {
+    self.customResultString = [[NSMutableString alloc] initWithString:@"Measures @AP x @TRV x @LON cm, with an estimated volume of about @VOL ml."];
 }
 
 #pragma mark - Tweaks...
