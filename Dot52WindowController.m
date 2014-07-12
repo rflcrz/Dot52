@@ -9,16 +9,17 @@
 #import "Dot52WindowController.h"
 #import "Dot52RoiManager.h"
 
-float corrCoeff; // Will store the value of the selected correction coefficient.
-NSString *apRoiName; // Name to the ROI created with the "AP" button. Will be used as key for this ROI in dot52ManagedRois NSMutableDictionary.
-NSString *trvRoiName; // Name to the ROI created with the "TRV" button. Will be used as key for this ROI in dot52ManagedRois NSMutableDictionary.
-NSString *lonRoiName; // Name to the ROI created with the "LON" button. Will be used as key for this ROI in dot52ManagedRois NSMutableDictionary.
+float _corrCoeff; // Will store the value of the selected correction coefficient.
+NSString *_apRoiName; // Name to the ROI created with the "AP" button. Will be used as key for this ROI in dot52ManagedRois NSMutableDictionary.
+NSString *_trvRoiName; // Name to the ROI created with the "TRV" button. Will be used as key for this ROI in dot52ManagedRois NSMutableDictionary.
+NSString *_lonRoiName; // Name to the ROI created with the "LON" button. Will be used as key for this ROI in dot52ManagedRois NSMutableDictionary.
 Dot52RoiManager *dot52RoiManager; // Pointer to Dot52RoiManager sharedInstance.
 
 @implementation Dot52WindowController
 @synthesize popover = _popover;
 
 @synthesize resultText = _resultText;
+@synthesize customResultTextField = _customResultTextField;
 @synthesize buttonCopyResult = _buttonCopyResult;
 @synthesize iconAp = _iconAp;
 @synthesize iconTrv = _iconTrv;
@@ -68,20 +69,26 @@ Dot52RoiManager *dot52RoiManager; // Pointer to Dot52RoiManager sharedInstance.
     
     // Implement this method to handle any initialization after dot52Window has been loaded from its nib file.
     
-    corrCoeff = M_PI/6;
-    apRoiName = @"Anteroposterior";
-    trvRoiName = @"Transverse";
-    lonRoiName = @"Longitudinal";
+    _corrCoeff = M_PI/6;
+    _apRoiName = @"Anteroposterior";
+    _trvRoiName = @"Transverse";
+    _lonRoiName = @"Longitudinal";
     dot52RoiManager = [[Dot52RoiManager sharedInstance] retain];
-    
-    NSURL *pluginResourcesURL = [[NSBundle bundleForClass:[self class]] resourceURL];
-    NSURL *fileUrl = [pluginResourcesURL URLByAppendingPathComponent:@"customResultString.txt"];
-    self.customResultString = [NSString stringWithContentsOfURL:fileUrl encoding:NSUTF8StringEncoding error:nil];
 
     [self updateResultText];
 }
 
-// Custom setter to save customResultString to the customResultString.txt
+// Custom setter to read from the customResultString.txt file.
+- (NSString *) customResultString {
+    if (_customResultString == nil) {
+        NSURL *pluginResourcesURL = [[NSBundle bundleForClass:[self class]] resourceURL];
+        NSURL *fileUrl = [pluginResourcesURL URLByAppendingPathComponent:@"customResultString.txt"];
+        self.customResultString = [NSString stringWithContentsOfURL:fileUrl encoding:NSUTF8StringEncoding error:nil];
+    }
+    return _customResultString;
+}
+
+// Custom setter to save customResultString to the customResultString.txt file.
 - (void)setCustomResultString:(NSString *)newString {
     if (newString != _customResultString) {
         [_customResultString release];
@@ -90,6 +97,8 @@ Dot52RoiManager *dot52RoiManager; // Pointer to Dot52RoiManager sharedInstance.
         NSURL *pluginResourcesURL = [[NSBundle bundleForClass:[self class]] resourceURL];
         NSURL *fileUrl = [pluginResourcesURL URLByAppendingPathComponent:@"customResultString.txt"];
         [_customResultString writeToURL:fileUrl atomically:YES encoding:NSUTF8StringEncoding error:nil];
+        
+        [self updateResultText];
     }
 }
 
@@ -97,13 +106,13 @@ Dot52RoiManager *dot52RoiManager; // Pointer to Dot52RoiManager sharedInstance.
     
     // Updating status icons of managed ROIs.
     NSString *roiBeingCreated = [dot52RoiManager dot52RoiName];
-    ROI *apRoi = [[dot52RoiManager dot52ManagedRois] objectForKey:apRoiName];
-    ROI *trvRoi = [[dot52RoiManager dot52ManagedRois] objectForKey:trvRoiName];
-    ROI *lonRoi = [[dot52RoiManager dot52ManagedRois] objectForKey:lonRoiName];
+    ROI *apRoi = [[dot52RoiManager dot52ManagedRois] objectForKey:_apRoiName];
+    ROI *trvRoi = [[dot52RoiManager dot52ManagedRois] objectForKey:_trvRoiName];
+    ROI *lonRoi = [[dot52RoiManager dot52ManagedRois] objectForKey:_lonRoiName];
     
     if (apRoi) {
         [self.iconAp setImage:[NSImage imageNamed:@"NSStatusAvailable"]];
-    } else if (roiBeingCreated == apRoiName) {
+    } else if (roiBeingCreated == _apRoiName) {
         [self.iconAp setImage:[NSImage imageNamed:@"NSStatusPartiallyAvailable"]];
     } else {
         [self.iconAp setImage:[NSImage imageNamed:@"NSStatusNone"]];
@@ -111,7 +120,7 @@ Dot52RoiManager *dot52RoiManager; // Pointer to Dot52RoiManager sharedInstance.
     
     if (trvRoi) {
         [self.iconTrv setImage:[NSImage imageNamed:@"NSStatusAvailable"]];
-    } else if (roiBeingCreated == trvRoiName) {
+    } else if (roiBeingCreated == _trvRoiName) {
         [self.iconTrv setImage:[NSImage imageNamed:@"NSStatusPartiallyAvailable"]];
     } else {
         [self.iconTrv setImage:[NSImage imageNamed:@"NSStatusNone"]];
@@ -119,17 +128,17 @@ Dot52RoiManager *dot52RoiManager; // Pointer to Dot52RoiManager sharedInstance.
     
     if (lonRoi) {
         [self.iconLon setImage:[NSImage imageNamed:@"NSStatusAvailable"]];
-    } else if (roiBeingCreated == lonRoiName) {
+    } else if (roiBeingCreated == _lonRoiName) {
         [self.iconLon setImage:[NSImage imageNamed:@"NSStatusPartiallyAvailable"]];
     } else {
         [self.iconLon setImage:[NSImage imageNamed:@"NSStatusNone"]];
     }
     
     // Updating NSTextFields and NSTextView
-    float apRoiLength = [self lengthForRoiName:apRoiName];
-    float trvRoiLength = [self lengthForRoiName:trvRoiName];
-    float lonRoiLength = [self lengthForRoiName:lonRoiName];
-    float estimatedVolume = apRoiLength * trvRoiLength * lonRoiLength * corrCoeff;
+    float apRoiLength = [self lengthForRoiName:_apRoiName];
+    float trvRoiLength = [self lengthForRoiName:_trvRoiName];
+    float lonRoiLength = [self lengthForRoiName:_lonRoiName];
+    float estimatedVolume = apRoiLength * trvRoiLength * lonRoiLength * _corrCoeff;
     
     if (apRoiLength > 0) {
         self.apDiameterString = [NSString stringWithFormat:@"= %.01f cm", apRoiLength];
@@ -189,16 +198,16 @@ Dot52RoiManager *dot52RoiManager; // Pointer to Dot52RoiManager sharedInstance.
 - (IBAction)selectCoefficient:(NSPopUpButton *)sender {
     switch ([sender indexOfSelectedItem]) {
         case 0:
-            corrCoeff = M_PI/6;
+            _corrCoeff = M_PI/6;
             break;
         case 1:
-            corrCoeff = 0.625;
+            _corrCoeff = 0.625;
             break;
         case 2:
-            corrCoeff = 0.71;
+            _corrCoeff = 0.71;
             break;
         default:
-            corrCoeff = M_PI/6;
+            _corrCoeff = M_PI/6;
             [sender selectItemAtIndex:0];
             break;
     }
@@ -206,15 +215,15 @@ Dot52RoiManager *dot52RoiManager; // Pointer to Dot52RoiManager sharedInstance.
 }
 
 - (IBAction)buttonCreateApRoi:(NSButton *)sender {
-    [dot52RoiManager createRoiType:tMesure withName:apRoiName withColor:[NSColor blueColor]];
+    [dot52RoiManager createRoiType:tMesure withName:_apRoiName withColor:[NSColor blueColor]];
 }
 
 - (IBAction)buttonCreateTrvRoi:(NSButton *)sender {
-    [dot52RoiManager createRoiType:tMesure withName:trvRoiName withColor:[NSColor redColor]];
+    [dot52RoiManager createRoiType:tMesure withName:_trvRoiName withColor:[NSColor redColor]];
 }
 
 - (IBAction)buttonCreateLonRoi:(NSButton *)sender {
-    [dot52RoiManager createRoiType:tMesure withName:lonRoiName withColor:[NSColor yellowColor]];
+    [dot52RoiManager createRoiType:tMesure withName:_lonRoiName withColor:[NSColor yellowColor]];
 }
 
 - (IBAction)copyResult:(NSButton *)sender {
@@ -228,8 +237,16 @@ Dot52RoiManager *dot52RoiManager; // Pointer to Dot52RoiManager sharedInstance.
     [self.popover showRelativeToRect:[self.resultText bounds] ofView:self.resultText preferredEdge:NSMinXEdge];
 }
 
+- (IBAction)insertPlaceholder:(NSButton *)sender {
+    NSMutableString *stringToInsert = [NSMutableString stringWithString:@"@"];
+    NSString *stringToAppend = [sender title];
+    [stringToInsert appendString:stringToAppend];
+    [self.customResultTextField.currentEditor insertText:stringToInsert];
+}
+
 - (IBAction)resetCustomResultString:(NSButton *)sender {
     self.customResultString = [[NSMutableString alloc] initWithString:@"Measures @AP x @TRV x @LON cm, with an estimated volume of about @VOL ml."];
+    [self.customResultTextField.currentEditor setString:self.customResultString];
 }
 
 #pragma mark - Tweaks...

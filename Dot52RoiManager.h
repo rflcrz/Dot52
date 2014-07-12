@@ -16,10 +16,10 @@
 @interface Dot52RoiManager : NSObject
 
 {
-    long dot52RoiType;
-    NSString *dot52RoiName;
-    NSColor *dot52RoiColor;
-    NSMutableDictionary *dot52ManagedRois;
+    long _dot52RoiType;
+    NSString *_dot52RoiName;
+    NSColor *_dot52RoiColor;
+    NSMutableDictionary *_dot52ManagedRois;
 }
 
 @property (readonly) long dot52RoiType;
