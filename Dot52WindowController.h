@@ -11,6 +11,7 @@
 @interface Dot52WindowController : NSWindowController
 {
     NSTextView *_resultText;
+    NSTextField *_customResultTextField;
     NSButton *_buttonCopyResult;
     NSImageView *_iconAp;
     NSImageView *_iconTrv;
@@ -29,6 +30,7 @@
 //  IBOutlets
 // ---------------------------------------------------------------------------
 @property (assign) IBOutlet NSTextView *resultText; // NSTextView to display result.
+@property (assign) IBOutlet NSTextField *customResultTextField; // NSTextField to edit custom result.
 @property (assign) IBOutlet NSButton *buttonCopyResult; // Button to let the user copy displayed result to clipboard.
 @property (assign) IBOutlet NSImageView *iconAp; // Icon to give feedback of process of AP ROI creation.
 @property (assign) IBOutlet NSImageView *iconTrv; // Icon to give feedback of process of TRV ROI creation.
@@ -40,7 +42,7 @@
 // ---------------------------------------------------------------------------
 //  Class Properties
 // ---------------------------------------------------------------------------
-@property (copy, nonatomic) NSString *customResultString; // Custom string, defined by the user, to create the text containing the results.
+@property (copy) NSString *customResultString; // Custom string, defined by the user, to create the text containing the results.
 @property (strong) NSString *resultString; // NSString to hold the result.
 @property (strong) NSString *apDiameterString; // NSString to hold AP diameter.
 @property (strong) NSString *trvDiameterString; // NSString to hold TRV diameter.
@@ -76,6 +78,8 @@
 - (IBAction)copyResult:(NSButton *)sender;
 
 - (IBAction)editResultText:(NSButton *)sender;
+
+- (IBAction)insertPlaceholder:(NSButton *)sender;
 
 - (IBAction)resetCustomResultString:(NSButton *)sender;
 
