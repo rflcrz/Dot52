@@ -1,4 +1,4 @@
-Dot52 is a OsiriX ROI plugin.
+EllipsoidVolume is a OsiriX ROI plugin.
 
 The aim of this small plugin is to speedup the radiologist routine when measuring organs like uterus, prostate, bladder etc, automaticaly calculating it's volume.
 
