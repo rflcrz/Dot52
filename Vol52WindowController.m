@@ -141,19 +141,19 @@ Vol52RoiManager *vol52RoiManager; // Pointer to Vol52RoiManager sharedInstance.
     float estimatedVolume = apRoiLength * trvRoiLength * lonRoiLength * _corrCoeff;
     
     if (apRoiLength > 0) {
-        self.apDiameterString = [NSString stringWithFormat:@"= %.01f cm", apRoiLength];
+        self.apDiameterString = [NSString stringWithFormat:@"= %@ cm", [self stringFromFloat:apRoiLength]];
     } else {
         self.apDiameterString = @"Set AP.";
     }
     
     if (trvRoiLength > 0) {
-        self.trvDiameterString = [NSString stringWithFormat:@"= %.01f cm", trvRoiLength];
+        self.trvDiameterString = [NSString stringWithFormat:@"= %@ cm", [self stringFromFloat:trvRoiLength]];
     } else {
         self.trvDiameterString = @"Set TRV.";
     }
     
     if (lonRoiLength > 0) {
-        self.lonDiameterString = [NSString stringWithFormat:@"= %.01f cm", lonRoiLength];
+        self.lonDiameterString = [NSString stringWithFormat:@"= %@ cm", [self stringFromFloat:lonRoiLength]];
     } else {
         self.lonDiameterString = @"Set LON.";
     }
