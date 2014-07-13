@@ -5,13 +5,9 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleExecutable</key>
-	<string>Dot52</string>
+	<string>EllipsoidVolume</string>
 	<key>CFBundleIconFile</key>
-	<string>Dot52.png</string>
-	<key>ToolbarIcon</key>
-	<string>Dot52.png</string>
-	<key>allowToolbarIcon</key>
-	<string>YES</string>
+	<string>EllipsoidVolume.png</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundlePackageType</key>
@@ -19,13 +15,17 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>0.1</string>
-	<key>NSPrincipalClass</key>
-	<string>Dot52Filter</string>
+	<string>0.5</string>
 	<key>MenuTitles</key>
 	<array>
-		<string>Dot52</string>
+		<string>Ellipsoid Volume</string>
 	</array>
+	<key>NSPrincipalClass</key>
+	<string>Dot52Filter</string>
+	<key>ToolbarIcon</key>
+	<string>EllipsoidVolume.png</string>
+	<key>allowToolbarIcon</key>
+	<string>YES</string>
 	<key>pluginType</key>
 	<string>roiTool</string>
 </dict>

@@ -1,6 +1,6 @@
-Dot52 is a OsiriX ROI plugin.
+EllipsoidVolume is a OsiriX ROI plugin.
 
-The aim of this small plugin is to speedup the radiologist routine when measuring organs like uterus, prostate, bladder etc.
+The aim of this small plugin is to speedup the radiologist routine when measuring organs like uterus, prostate, bladder etc, automaticaly calculating it's volume.
 
 #Functional Requirements
 
@@ -19,6 +19,4 @@ This is my first code. I work as a radiologist and this small project is my firs
 
 #My Current Challenges
 
-- I need to understand who is responsible to release this plugin when its window is closed.
-- Implement a way to allow user to configure a custom text (containing the measurements and volume) to be copied. I’m thinking about a NSTokenField that hold free text and tokens that represents AP x LON x TRV diameters and VOL.
-- Implement a way to allow user to persist this this custom text setting. I’m thinking about using Core Data to write a plist file.
+- I need to understand more about memory management. At this moment I don't know who is responsible to release my plugin after it's window is closed.
