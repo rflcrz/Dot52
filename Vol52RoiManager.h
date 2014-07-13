@@ -1,34 +1,34 @@
 //
-//  Dot52RoiCreator.h
-//  Dot52
+//  Vol52RoiCreator.h
+//  Vol52
 //
 //  Created by Rafael Cruz on 15/12/13.
 //
 //
 
 #import <Foundation/Foundation.h>
-#import "Dot52Filter.h"
+#import "Vol52Filter.h"
 #import <OsiriXAPI/Notifications.h>
 
 /** "Kind of" a singleton class, but it may be released.
  Its object must be accessed by using sharedInstance class method and the caller must retain it.
 **/
-@interface Dot52RoiManager : NSObject
+@interface Vol52RoiManager : NSObject
 
 {
-    long _dot52RoiType;
-    NSString *_dot52RoiName;
-    NSColor *_dot52RoiColor;
-    NSMutableDictionary *_dot52ManagedRois;
+    long _vol52RoiType;
+    NSString *_vol52RoiName;
+    NSColor *_vol52RoiColor;
+    NSMutableDictionary *_vol52ManagedRois;
 }
 
-@property (readonly) long dot52RoiType;
-@property (strong, readonly) NSString *dot52RoiName;
-@property (strong, readonly) NSColor *dot52RoiColor;
-@property (strong, readonly) NSMutableDictionary *dot52ManagedRois;
+@property (readonly) long vol52RoiType;
+@property (strong, readonly) NSString *vol52RoiName;
+@property (strong, readonly) NSColor *vol52RoiColor;
+@property (strong, readonly) NSMutableDictionary *vol52ManagedRois;
 
 /*!
- This method returns the shared instance of Dot52RoiManager Class.
+ This method returns the shared instance of Vol52RoiManager Class.
  Create the instance if not already created.
  Return the instance.
  Caller must retain the object (at this moment).

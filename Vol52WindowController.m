@@ -1,21 +1,21 @@
 //
-//  Dot52WindowController.m
-//  Dot52
+//  Vol52WindowController.m
+//  Vol52
 //
 //  Created by Rafael Cruz on 15/12/13.
 //
 //
 
-#import "Dot52WindowController.h"
-#import "Dot52RoiManager.h"
+#import "Vol52WindowController.h"
+#import "Vol52RoiManager.h"
 
 float _corrCoeff; // Will store the value of the selected correction coefficient.
-NSString *_apRoiName; // Name to the ROI created with the "AP" button. Will be used as key for this ROI in dot52ManagedRois NSMutableDictionary.
-NSString *_trvRoiName; // Name to the ROI created with the "TRV" button. Will be used as key for this ROI in dot52ManagedRois NSMutableDictionary.
-NSString *_lonRoiName; // Name to the ROI created with the "LON" button. Will be used as key for this ROI in dot52ManagedRois NSMutableDictionary.
-Dot52RoiManager *dot52RoiManager; // Pointer to Dot52RoiManager sharedInstance.
+NSString *_apRoiName; // Name to the ROI created with the "AP" button. Will be used as key for this ROI in vol52ManagedRois NSMutableDictionary.
+NSString *_trvRoiName; // Name to the ROI created with the "TRV" button. Will be used as key for this ROI in vol52ManagedRois NSMutableDictionary.
+NSString *_lonRoiName; // Name to the ROI created with the "LON" button. Will be used as key for this ROI in vol52ManagedRois NSMutableDictionary.
+Vol52RoiManager *vol52RoiManager; // Pointer to Vol52RoiManager sharedInstance.
 
-@implementation Dot52WindowController
+@implementation Vol52WindowController
 @synthesize popover = _popover;
 
 @synthesize resultText = _resultText;
@@ -36,13 +36,13 @@ Dot52RoiManager *dot52RoiManager; // Pointer to Dot52RoiManager sharedInstance.
 //  Class Methods
 // ---------------------------------------------------------------------------
 + (id) sharedInstance {
-    static Dot52WindowController *dot52Window = nil;
+    static Vol52WindowController *vol52Window = nil;
     @synchronized(self) {
-        if (dot52Window == nil)
-            dot52Window = [[self alloc] initWithWindowNibName:@"Dot52WindowController"];
+        if (vol52Window == nil)
+            vol52Window = [[self alloc] initWithWindowNibName:@"Vol52WindowController"];
     }
-    //[dot52Window autorelease];
-    return dot52Window;
+    //[vol52Window autorelease];
+    return vol52Window;
 }
 
 #pragma mark - Instance Methods
@@ -59,21 +59,21 @@ Dot52RoiManager *dot52RoiManager; // Pointer to Dot52RoiManager sharedInstance.
 }
 
 - (void)dealloc {
-    NSLog(@"dot52WindowControler dealloc");
-    [dot52RoiManager release];
+    NSLog(@"vol52WindowControler dealloc");
+    [vol52RoiManager release];
     [super dealloc];
 }
 
 - (void)windowDidLoad {
     [super windowDidLoad];
     
-    // Implement this method to handle any initialization after dot52Window has been loaded from its nib file.
+    // Implement this method to handle any initialization after vol52Window has been loaded from its nib file.
     
     _corrCoeff = M_PI/6;
     _apRoiName = @"Anteroposterior";
     _trvRoiName = @"Transverse";
     _lonRoiName = @"Longitudinal";
-    dot52RoiManager = [[Dot52RoiManager sharedInstance] retain];
+    vol52RoiManager = [[Vol52RoiManager sharedInstance] retain];
 
     [self updateResultText];
 }
@@ -105,10 +105,10 @@ Dot52RoiManager *dot52RoiManager; // Pointer to Dot52RoiManager sharedInstance.
 - (void) updateResultText {
     
     // Updating status icons of managed ROIs.
-    NSString *roiBeingCreated = [dot52RoiManager dot52RoiName];
-    ROI *apRoi = [[dot52RoiManager dot52ManagedRois] objectForKey:_apRoiName];
-    ROI *trvRoi = [[dot52RoiManager dot52ManagedRois] objectForKey:_trvRoiName];
-    ROI *lonRoi = [[dot52RoiManager dot52ManagedRois] objectForKey:_lonRoiName];
+    NSString *roiBeingCreated = [vol52RoiManager vol52RoiName];
+    ROI *apRoi = [[vol52RoiManager vol52ManagedRois] objectForKey:_apRoiName];
+    ROI *trvRoi = [[vol52RoiManager vol52ManagedRois] objectForKey:_trvRoiName];
+    ROI *lonRoi = [[vol52RoiManager vol52ManagedRois] objectForKey:_lonRoiName];
     
     if (apRoi) {
         [self.iconAp setImage:[NSImage imageNamed:@"NSStatusAvailable"]];
@@ -215,15 +215,15 @@ Dot52RoiManager *dot52RoiManager; // Pointer to Dot52RoiManager sharedInstance.
 }
 
 - (IBAction)buttonCreateApRoi:(NSButton *)sender {
-    [dot52RoiManager createRoiType:tMesure withName:_apRoiName withColor:[NSColor blueColor]];
+    [vol52RoiManager createRoiType:tMesure withName:_apRoiName withColor:[NSColor blueColor]];
 }
 
 - (IBAction)buttonCreateTrvRoi:(NSButton *)sender {
-    [dot52RoiManager createRoiType:tMesure withName:_trvRoiName withColor:[NSColor redColor]];
+    [vol52RoiManager createRoiType:tMesure withName:_trvRoiName withColor:[NSColor redColor]];
 }
 
 - (IBAction)buttonCreateLonRoi:(NSButton *)sender {
-    [dot52RoiManager createRoiType:tMesure withName:_lonRoiName withColor:[NSColor yellowColor]];
+    [vol52RoiManager createRoiType:tMesure withName:_lonRoiName withColor:[NSColor yellowColor]];
 }
 
 - (IBAction)copyResult:(NSButton *)sender {
@@ -260,8 +260,8 @@ Dot52RoiManager *dot52RoiManager; // Pointer to Dot52RoiManager sharedInstance.
 //  not check the number of points - raising an exception.
 // ---------------------------------------------------------------------------
 - (float) lengthForRoiName: (NSString*) roiName {
-    NSDictionary *dot52ManagedRois = [dot52RoiManager dot52ManagedRois];
-    ROI *roi = [dot52ManagedRois objectForKey:roiName];
+    NSDictionary *vol52ManagedRois = [vol52RoiManager vol52ManagedRois];
+    ROI *roi = [vol52ManagedRois objectForKey:roiName];
     int numberOfPoints = [[roi points] count];
     float roiLength = 0;
     if (numberOfPoints > 1) { // See comments.

@@ -1,6 +1,6 @@
 //
-//  Dot52WindowController.h
-//  Dot52
+//  Vol52WindowController.h
+//  Vol52
 //
 //  Created by Rafael Cruz on 15/12/13.
 //
@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface Dot52WindowController : NSWindowController
+@interface Vol52WindowController : NSWindowController
 {
     NSTextView *_resultText;
     NSTextField *_customResultTextField;

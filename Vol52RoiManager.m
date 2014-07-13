@@ -1,37 +1,37 @@
 //
-//  Dot52RoiCreator.m
-//  Dot52
+//  Vol52RoiCreator.m
+//  Vol52
 //
 //  Created by Rafael Cruz on 15/12/13.
 //
 //
 
-#import "Dot52RoiManager.h"
+#import "Vol52RoiManager.h"
 
-Dot52WindowController *dot52WindowController; //  A pointer to the Dot52WindowController sharedInstance.
+Vol52WindowController *vol52WindowController; //  A pointer to the Vol52WindowController sharedInstance.
 
-@implementation Dot52RoiManager
+@implementation Vol52RoiManager
 
-@synthesize dot52RoiType = _dot52RoiType;
-@synthesize dot52RoiName = _dot52RoiName;
-@synthesize dot52RoiColor = _dot52RoiColor;
-@synthesize dot52ManagedRois = _dot52ManagedRois;
+@synthesize vol52RoiType = _vol52RoiType;
+@synthesize vol52RoiName = _vol52RoiName;
+@synthesize vol52RoiColor = _vol52RoiColor;
+@synthesize vol52ManagedRois = _vol52ManagedRois;
 
-static Dot52RoiManager *dot52RoiManager = nil;
+static Vol52RoiManager *vol52RoiManager = nil;
 
 + (id) sharedInstance {
     @synchronized(self) {
-        if (dot52RoiManager == nil)
-            dot52RoiManager = [[self alloc] init];
+        if (vol52RoiManager == nil)
+            vol52RoiManager = [[self alloc] init];
     }
-    [dot52RoiManager autorelease];
-    return dot52RoiManager;
+    [vol52RoiManager autorelease];
+    return vol52RoiManager;
 }
 
 - (id) init {
     if (self = [super init]) {
-        _dot52ManagedRois = [[NSMutableDictionary alloc] init];
-        dot52WindowController = [Dot52WindowController sharedInstance];
+        _vol52ManagedRois = [[NSMutableDictionary alloc] init];
+        vol52WindowController = [Vol52WindowController sharedInstance];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newRoiCreated:) name:OsirixAddROINotification object:NULL];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(roiWasChanged:) name:OsirixROIChangeNotification object:NULL];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(roiWasDeleted:) name:OsirixRemoveROINotification object:NULL];
@@ -41,24 +41,24 @@ static Dot52RoiManager *dot52RoiManager = nil;
 }
 
 - (void)dealloc {
-    NSLog(@"[Dot52] dot52RoiManager dealloc");
+    NSLog(@"[Vol52] vol52RoiManager dealloc");
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [_dot52ManagedRois release];
+    [_vol52ManagedRois release];
     [super dealloc];
 }
 
 - (void) searchForRoisToManage: (NSMutableArray*) arrayOfNames {
-//  Method would look for ROIs if dot52RoiManager were relased. But it is not released in this implementation at this moment.
+//  Method would look for ROIs if vol52RoiManager were relased. But it is not released in this implementation at this moment.
     
 }
 
 - (void) createRoiType: (long) roiType withName: (NSString*) roiName withColor: (NSColor*) roiColor {
     
-    ROI *alredyCreatedRoi = [self.dot52ManagedRois objectForKey:roiName];
+    ROI *alredyCreatedRoi = [self.vol52ManagedRois objectForKey:roiName];
     
     if (alredyCreatedRoi) { //Aqui tenho que ver, pois a condição é baseada apenas no nome e não no tipo de ROI. Tenho que pensar.
         
-        NSLog(@"[Dot52] Already Created: %@",alredyCreatedRoi.name);
+        NSLog(@"[Vol52] Already Created: %@",alredyCreatedRoi.name);
         
         DCMView *dcmView = [alredyCreatedRoi curView];
         ViewerController *viewerControler = [dcmView windowController];
@@ -66,12 +66,12 @@ static Dot52RoiManager *dot52RoiManager = nil;
         short numberOfImages = [viewerControler getNumberOfImages];
         
         if ([dcmView flippedData]) {
-            NSLog(@"[Dot52] Flipped");
+            NSLog(@"[Vol52] Flipped");
             long imageIndex = numberOfImages -imageIndexOfROI -1;
             [viewerControler setImageIndex:imageIndex];
         }
         else {
-            NSLog(@"[Dot52] Not Flipped");
+            NSLog(@"[Vol52] Not Flipped");
             long imageIndex = imageIndexOfROI;
             [viewerControler setImageIndex:imageIndex];
         }
@@ -80,58 +80,58 @@ static Dot52RoiManager *dot52RoiManager = nil;
         [viewerControler selectROI:alredyCreatedRoi deselectingOther:YES];
     }
     else {
-        NSLog(@"[Dot52] Not Created: %@",alredyCreatedRoi.name);
-        _dot52RoiType = roiType;
-        _dot52RoiName = roiName;
-        _dot52RoiColor = roiColor;
+        NSLog(@"[Vol52] Not Created: %@",alredyCreatedRoi.name);
+        _vol52RoiType = roiType;
+        _vol52RoiName = roiName;
+        _vol52RoiColor = roiColor;
         for (ViewerController *viewer in [ViewerController getDisplayed2DViewers]) { // Select ROI tool to each viewer.
             [viewer setROIToolTag:roiType];
         }
         [[[ViewerController frontMostDisplayed2DViewer] window] makeKeyAndOrderFront:self]; // Makes viewer key window.
-        [dot52WindowController updateResultText]; // Update pluginu interface.
+        [vol52WindowController updateResultText]; // Update pluginu interface.
     }
 }
 
 - (void) newRoiCreated: (NSNotification*) notification {
     
     ROI *newRoi = [[notification userInfo] objectForKey:@"ROI"];
-    ROI *alredyCreatedRoi = [self.dot52ManagedRois objectForKey:self.dot52RoiName];
-    NSLog(@"[Dot52] Notification NEWROI: %@", [newRoi name]);
+    ROI *alredyCreatedRoi = [self.vol52ManagedRois objectForKey:self.vol52RoiName];
+    NSLog(@"[Vol52] Notification NEWROI: %@", [newRoi name]);
     
     if (alredyCreatedRoi) { //Check if the ROI is already created.
         return;
-    } else if ([newRoi type] == self.dot52RoiType) {
-        [newRoi setName:self.dot52RoiName];
-        [newRoi setNSColor:self.dot52RoiColor globally:NO];
-        NSLog(@"[Dot52] dot52ManagedRois ADDING: %@", newRoi.name);
-        [self.dot52ManagedRois setObject:newRoi forKey:self.dot52RoiName];
-        [dot52WindowController updateResultText]; // Update plugin interface.
+    } else if ([newRoi type] == self.vol52RoiType) {
+        [newRoi setName:self.vol52RoiName];
+        [newRoi setNSColor:self.vol52RoiColor globally:NO];
+        NSLog(@"[Vol52] vol52ManagedRois ADDING: %@", newRoi.name);
+        [self.vol52ManagedRois setObject:newRoi forKey:self.vol52RoiName];
+        [vol52WindowController updateResultText]; // Update plugin interface.
     }
 }
 
 - (void) roiWasChanged: (NSNotification*) notification {
     
     ROI* changedRoi = [notification object];
-    NSArray *allKeysForRoi = [self.dot52ManagedRois allKeysForObject:changedRoi];
-    NSLog(@"[Dot52] Notification CHANGED: %@", [changedRoi name]);
+    NSArray *allKeysForRoi = [self.vol52ManagedRois allKeysForObject:changedRoi];
+    NSLog(@"[Vol52] Notification CHANGED: %@", [changedRoi name]);
     
     if ([allKeysForRoi count] > 0) { //Check if the ROI is managed.
-        [dot52WindowController updateResultText]; // Update plugin interface.
+        [vol52WindowController updateResultText]; // Update plugin interface.
     }
 }
 
 - (void) roiWasDeleted: (NSNotification*) notification {
     
     ROI* deletedRoi = [notification object];
-    NSArray *allKeysForRoi = [self.dot52ManagedRois allKeysForObject:deletedRoi];
-    NSLog(@"[Dot52] Notification DELETED: %@", [deletedRoi name]);
+    NSArray *allKeysForRoi = [self.vol52ManagedRois allKeysForObject:deletedRoi];
+    NSLog(@"[Vol52] Notification DELETED: %@", [deletedRoi name]);
     
     if ([allKeysForRoi count] > 0) { // Check if the ROI is managed.
         for (NSString *keyForRoi in allKeysForRoi) { // Maybe unecessary. Probably there will be only one key for each ROI.
-            NSLog(@"[Dot52] dot52ManagedRois REMOVING: %@", [deletedRoi name]);
-            [self.dot52ManagedRois removeObjectForKey:keyForRoi];
+            NSLog(@"[Vol52] vol52ManagedRois REMOVING: %@", [deletedRoi name]);
+            [self.vol52ManagedRois removeObjectForKey:keyForRoi];
         }
-        [dot52WindowController updateResultText]; // Update plugin interface.
+        [vol52WindowController updateResultText]; // Update plugin interface.
     }
 }
 
@@ -139,21 +139,21 @@ static Dot52RoiManager *dot52RoiManager = nil;
     
     long toolType = [[[ViewerController frontMostDisplayed2DViewer] imageView] currentTool];
     
-    if (toolType != self.dot52RoiType) {
+    if (toolType != self.vol52RoiType) {
         [self cancelRoiCreation];
     }
 }
 
 - (void) cancelRoiCreation {
-    _dot52RoiType = nil;
-    _dot52RoiName = nil;
-    _dot52RoiColor = nil;
-    [dot52WindowController updateResultText]; // Update plugin interface.
+    _vol52RoiType = nil;
+    _vol52RoiName = nil;
+    _vol52RoiColor = nil;
+    [vol52WindowController updateResultText]; // Update plugin interface.
 }
 
 - (void) deleteRoiWithName: (NSString*) roiName {
     
-    ROI *roiToDelete = [self.dot52ManagedRois objectForKey:roiName];
+    ROI *roiToDelete = [self.vol52ManagedRois objectForKey:roiName];
     DCMView *view = [roiToDelete curView];
     ViewerController *viewerControler = [view windowController];
     
@@ -164,12 +164,12 @@ static Dot52RoiManager *dot52RoiManager = nil;
 
 - (void) updateRoiWithName: (NSString*) roiName withColor: (NSColor*) roiColor {
     
-    ROI *roiToUpdate = [self.dot52ManagedRois objectForKey:roiName]; //tenho que ver esse lance do objectKey e nome do Roi... como vou identificar.
+    ROI *roiToUpdate = [self.vol52ManagedRois objectForKey:roiName]; //tenho que ver esse lance do objectKey e nome do Roi... como vou identificar.
     
     if (roiToUpdate) {
-        [roiToUpdate setName:self.dot52RoiName];
-        [roiToUpdate setNSColor:self.dot52RoiColor globally:NO];
-        [self.dot52ManagedRois setObject:roiToUpdate forKey:self.dot52RoiName]; //tenho que ver como vou mudar a key dentro do dictionary.
+        [roiToUpdate setName:self.vol52RoiName];
+        [roiToUpdate setNSColor:self.vol52RoiColor globally:NO];
+        [self.vol52ManagedRois setObject:roiToUpdate forKey:self.vol52RoiName]; //tenho que ver como vou mudar a key dentro do dictionary.
         [self cancelRoiCreation];
     }
 }
