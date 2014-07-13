@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8D5B49AC048680CD000E48DA"
-               BuildableName = "Dot52.osirixplugin"
-               BlueprintName = "Dot52"
-               ReferencedContainer = "container:Dot52.xcodeproj">
+               BuildableName = "EllipsoidVolume.osirixplugin"
+               BlueprintName = "EllipsoidVolume"
+               ReferencedContainer = "container:EllipsoidVolume.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
