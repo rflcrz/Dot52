@@ -1,13 +1,13 @@
 //
-//  Dot52Filter.m
-//  Dot52
+//  Vol52Filter.m
+//  Vol52
 //
 //  Copyright (c) 2013 Rafael. All rights reserved.
 //
 
-#import "Dot52Filter.h"
+#import "Vol52Filter.h"
 
-@implementation Dot52Filter
+@implementation Vol52Filter
 
 - (void) initPlugin
 {
@@ -16,7 +16,7 @@
 - (long) filterImage:(NSString*) menuName
 {
 	//Menu clicked.
-    [[Dot52WindowController sharedInstance] showWindow:nil];
+    [[Vol52WindowController sharedInstance] showWindow:nil];
     return 0;
 }
 

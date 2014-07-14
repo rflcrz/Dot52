@@ -7,19 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		889151871972BD91006D0666 /* OsiriXAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 889151861972BD91006D0666 /* OsiriXAPI.framework */; };
 		8D5B49AE048680CD000E48DA /* EllipsoidVolume_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 32DBCF630370AF2F00C91783 /* EllipsoidVolume_Prefix.pch */; };
 		8D5B49B0048680CD000E48DA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C167DFE841241C02AAC07 /* InfoPlist.strings */; };
 		8D5B49B4048680CD000E48DA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
-		ABA48A650680BB600089EB4F /* Dot52Filter.h in Headers */ = {isa = PBXBuildFile; fileRef = ABA48A640680BB600089EB4F /* Dot52Filter.h */; };
-		ABA48A670680BB690089EB4F /* Dot52Filter.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA48A660680BB690089EB4F /* Dot52Filter.m */; };
-		BF127CFD195A287F007D563F /* OsiriXAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF127CFC195A287F007D563F /* OsiriXAPI.framework */; };
+		ABA48A650680BB600089EB4F /* Vol52Filter.h in Headers */ = {isa = PBXBuildFile; fileRef = ABA48A640680BB600089EB4F /* Vol52Filter.h */; };
+		ABA48A670680BB690089EB4F /* Vol52Filter.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA48A660680BB690089EB4F /* Vol52Filter.m */; };
 		BF64317F196D46E8006384EA /* customResultString.txt in Resources */ = {isa = PBXBuildFile; fileRef = BF64317E196D46E8006384EA /* customResultString.txt */; };
-		BFBD5489185DB5C900D73F90 /* Dot52WindowController.h in Headers */ = {isa = PBXBuildFile; fileRef = BFBD5486185DB5C900D73F90 /* Dot52WindowController.h */; };
-		BFBD548A185DB5C900D73F90 /* Dot52WindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBD5487185DB5C900D73F90 /* Dot52WindowController.m */; };
-		BFBD548B185DB5C900D73F90 /* Dot52WindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFBD5488185DB5C900D73F90 /* Dot52WindowController.xib */; };
+		BFBD5489185DB5C900D73F90 /* Vol52WindowController.h in Headers */ = {isa = PBXBuildFile; fileRef = BFBD5486185DB5C900D73F90 /* Vol52WindowController.h */; };
+		BFBD548A185DB5C900D73F90 /* Vol52WindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBD5487185DB5C900D73F90 /* Vol52WindowController.m */; };
+		BFBD548B185DB5C900D73F90 /* Vol52WindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFBD5488185DB5C900D73F90 /* Vol52WindowController.xib */; };
 		BFBD548D185DB64D00D73F90 /* EllipsoidVolume.png in Resources */ = {isa = PBXBuildFile; fileRef = BFBD548C185DB64D00D73F90 /* EllipsoidVolume.png */; };
-		BFBD5490185DB67500D73F90 /* Dot52RoiManager.h in Headers */ = {isa = PBXBuildFile; fileRef = BFBD548E185DB67500D73F90 /* Dot52RoiManager.h */; };
-		BFBD5491185DB67500D73F90 /* Dot52RoiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBD548F185DB67500D73F90 /* Dot52RoiManager.m */; };
+		BFBD5490185DB67500D73F90 /* Vol52RoiManager.h in Headers */ = {isa = PBXBuildFile; fileRef = BFBD548E185DB67500D73F90 /* Vol52RoiManager.h */; };
+		BFBD5491185DB67500D73F90 /* Vol52RoiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBD548F185DB67500D73F90 /* Vol52RoiManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,18 +28,18 @@
 		089C167FFE841241C02AAC07 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		32DBCF630370AF2F00C91783 /* EllipsoidVolume_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EllipsoidVolume_Prefix.pch; sourceTree = "<group>"; };
+		889151861972BD91006D0666 /* OsiriXAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OsiriXAPI.framework; path = ../osirix/build/Development/OsiriXAPI.framework; sourceTree = "<group>"; };
 		8D5B49B7048680CD000E48DA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AB5D36050680E57E00F4007A /* EllipsoidVolume.osirixplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EllipsoidVolume.osirixplugin; sourceTree = BUILT_PRODUCTS_DIR; };
-		ABA48A640680BB600089EB4F /* Dot52Filter.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Dot52Filter.h; sourceTree = "<group>"; };
-		ABA48A660680BB690089EB4F /* Dot52Filter.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = Dot52Filter.m; sourceTree = "<group>"; };
-		BF127CFC195A287F007D563F /* OsiriXAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OsiriXAPI.framework; path = ../osirix/build/Development/OsiriXAPI.framework; sourceTree = "<group>"; };
+		ABA48A640680BB600089EB4F /* Vol52Filter.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Vol52Filter.h; sourceTree = "<group>"; };
+		ABA48A660680BB690089EB4F /* Vol52Filter.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = Vol52Filter.m; sourceTree = "<group>"; };
 		BF64317E196D46E8006384EA /* customResultString.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = customResultString.txt; sourceTree = "<group>"; };
-		BFBD5486185DB5C900D73F90 /* Dot52WindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dot52WindowController.h; sourceTree = "<group>"; };
-		BFBD5487185DB5C900D73F90 /* Dot52WindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Dot52WindowController.m; sourceTree = "<group>"; };
-		BFBD5488185DB5C900D73F90 /* Dot52WindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Dot52WindowController.xib; sourceTree = "<group>"; };
+		BFBD5486185DB5C900D73F90 /* Vol52WindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vol52WindowController.h; sourceTree = "<group>"; };
+		BFBD5487185DB5C900D73F90 /* Vol52WindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Vol52WindowController.m; sourceTree = "<group>"; };
+		BFBD5488185DB5C900D73F90 /* Vol52WindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Vol52WindowController.xib; sourceTree = "<group>"; };
 		BFBD548C185DB64D00D73F90 /* EllipsoidVolume.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = EllipsoidVolume.png; sourceTree = "<group>"; };
-		BFBD548E185DB67500D73F90 /* Dot52RoiManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dot52RoiManager.h; sourceTree = "<group>"; };
-		BFBD548F185DB67500D73F90 /* Dot52RoiManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Dot52RoiManager.m; sourceTree = "<group>"; };
+		BFBD548E185DB67500D73F90 /* Vol52RoiManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vol52RoiManager.h; sourceTree = "<group>"; };
+		BFBD548F185DB67500D73F90 /* Vol52RoiManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Vol52RoiManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,7 +48,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D5B49B4048680CD000E48DA /* Cocoa.framework in Frameworks */,
-				BF127CFD195A287F007D563F /* OsiriXAPI.framework in Frameworks */,
+				889151871972BD91006D0666 /* OsiriXAPI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,7 +70,7 @@
 		089C1671FE841209C02AAC07 /* Frameworks and Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				BF127CFC195A287F007D563F /* OsiriXAPI.framework */,
+				889151861972BD91006D0666 /* OsiriXAPI.framework */,
 				1058C7ACFEA557BF11CA2CBB /* Linked Frameworks */,
 				1058C7AEFEA557BF11CA2CBB /* Other Frameworks */,
 			);
@@ -82,7 +82,7 @@
 			children = (
 				BF64317E196D46E8006384EA /* customResultString.txt */,
 				BFBD548C185DB64D00D73F90 /* EllipsoidVolume.png */,
-				BFBD5488185DB5C900D73F90 /* Dot52WindowController.xib */,
+				BFBD5488185DB5C900D73F90 /* Vol52WindowController.xib */,
 				8D5B49B7048680CD000E48DA /* Info.plist */,
 				089C167DFE841241C02AAC07 /* InfoPlist.strings */,
 			);
@@ -92,7 +92,7 @@
 		08FB77AFFE84173DC02AAC07 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				AB2C26750677B0C400A08910 /* Dot52Filter */,
+				AB2C26750677B0C400A08910 /* Vol52Filter */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -130,17 +130,17 @@
 			name = "Other Sources";
 			sourceTree = "<group>";
 		};
-		AB2C26750677B0C400A08910 /* Dot52Filter */ = {
+		AB2C26750677B0C400A08910 /* Vol52Filter */ = {
 			isa = PBXGroup;
 			children = (
-				ABA48A640680BB600089EB4F /* Dot52Filter.h */,
-				ABA48A660680BB690089EB4F /* Dot52Filter.m */,
-				BFBD548E185DB67500D73F90 /* Dot52RoiManager.h */,
-				BFBD548F185DB67500D73F90 /* Dot52RoiManager.m */,
-				BFBD5486185DB5C900D73F90 /* Dot52WindowController.h */,
-				BFBD5487185DB5C900D73F90 /* Dot52WindowController.m */,
+				ABA48A640680BB600089EB4F /* Vol52Filter.h */,
+				ABA48A660680BB690089EB4F /* Vol52Filter.m */,
+				BFBD548E185DB67500D73F90 /* Vol52RoiManager.h */,
+				BFBD548F185DB67500D73F90 /* Vol52RoiManager.m */,
+				BFBD5486185DB5C900D73F90 /* Vol52WindowController.h */,
+				BFBD5487185DB5C900D73F90 /* Vol52WindowController.m */,
 			);
-			name = Dot52Filter;
+			name = Vol52Filter;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -151,9 +151,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D5B49AE048680CD000E48DA /* EllipsoidVolume_Prefix.pch in Headers */,
-				BFBD5489185DB5C900D73F90 /* Dot52WindowController.h in Headers */,
-				ABA48A650680BB600089EB4F /* Dot52Filter.h in Headers */,
-				BFBD5490185DB67500D73F90 /* Dot52RoiManager.h in Headers */,
+				BFBD5489185DB5C900D73F90 /* Vol52WindowController.h in Headers */,
+				ABA48A650680BB600089EB4F /* Vol52Filter.h in Headers */,
+				BFBD5490185DB67500D73F90 /* Vol52RoiManager.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,7 +211,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BFBD548B185DB5C900D73F90 /* Dot52WindowController.xib in Resources */,
+				BFBD548B185DB5C900D73F90 /* Vol52WindowController.xib in Resources */,
 				BF64317F196D46E8006384EA /* customResultString.txt in Resources */,
 				8D5B49B0048680CD000E48DA /* InfoPlist.strings in Resources */,
 				BFBD548D185DB64D00D73F90 /* EllipsoidVolume.png in Resources */,
@@ -235,9 +235,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BFBD548A185DB5C900D73F90 /* Dot52WindowController.m in Sources */,
-				ABA48A670680BB690089EB4F /* Dot52Filter.m in Sources */,
-				BFBD5491185DB67500D73F90 /* Dot52RoiManager.m in Sources */,
+				BFBD548A185DB5C900D73F90 /* Vol52WindowController.m in Sources */,
+				ABA48A670680BB690089EB4F /* Vol52Filter.m in Sources */,
+				BFBD5491185DB67500D73F90 /* Vol52RoiManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,7 +266,7 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 					"$(PROJECT_DIR)",
-					/Users/rflcrz/Documents/Dev/osirix/build/Development,
+					"~/Documents/Dev/osirix/build/Development",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
@@ -311,7 +311,7 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 					"$(PROJECT_DIR)",
-					/Users/rflcrz/Documents/Dev/osirix/build/Development,
+					"~/Documents/Dev/osirix/build/Development",
 				);
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_ENABLE_TRIGRAPHS = NO;

@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="Dot52WindowController">
+        <customObject id="-2" userLabel="File's Owner" customClass="Vol52WindowController">
             <connections>
                 <outlet property="buttonCopyResult" destination="fNF-qH-wyw" id="eXa-hu-0PO"/>
                 <outlet property="customResultTextField" destination="hr3-SK-ghI" id="3vn-su-mWz"/>

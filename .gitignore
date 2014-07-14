@@ -1,0 +1,64 @@
+# Created by http://www.gitignore.io
+# Some changes added based on: http://stackoverflow.com/questions/49478/git-ignore-file-for-xcode-projects
+
+### OSX ###
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must end with two \r
+Icon
+
+
+# Thumbnails
+._*
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+
+### Objective-C ###
+# Xcode
+#
+
+# NB: slash on the end, so we only remove the FOLDER, not any files that were badly named "build"
+build/
+
+# SOMETIMES you need to put this file in version control.
+# Apple designed it poorly - if you use "custom executables", they are
+#  saved in this file.
+# 99% of projects do NOT use those, so they do NOT want to version control this file.
+#  ..but if you're in the 1%, comment out the line "*.pbxuser"
+#*.pbxuser
+!default.pbxuser
+
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata
+*.xccheckout
+*.moved-aside
+# NB: slash on the end, so we only remove the FOLDER, not any files that were badly named "DerivedData"
+DerivedData/
+*.hmap
+*.ipa
+*.xcuserstate
+
+# CocoaPods
+#
+# We recommend against adding the Pods directory to your .gitignore. However
+# you should judge for yourself, the pros and cons are mentioned at:
+# http://guides.cocoapods.org/using/using-cocoapods.html#should-i-ignore-the-pods-directory-in-source-control
+#
+# Pods/

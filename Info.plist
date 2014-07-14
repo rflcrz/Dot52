@@ -21,7 +21,7 @@
 		<string>Ellipsoid Volume</string>
 	</array>
 	<key>NSPrincipalClass</key>
-	<string>Dot52Filter</string>
+	<string>Vol52Filter</string>
 	<key>ToolbarIcon</key>
 	<string>EllipsoidVolume.png</string>
 	<key>allowToolbarIcon</key>
