@@ -7,7 +7,7 @@
 	<key>CFBundleExecutable</key>
 	<string>EllipsoidVolume</string>
 	<key>CFBundleIconFile</key>
-	<string>EllipsoidVolume.png</string>
+	<string>EllipsoidVolume.icns</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundlePackageType</key>
@@ -23,7 +23,7 @@
 	<key>NSPrincipalClass</key>
 	<string>Vol52Filter</string>
 	<key>ToolbarIcon</key>
-	<string>EllipsoidVolume.png</string>
+	<string>EllipsoidVolume.icns</string>
 	<key>allowToolbarIcon</key>
 	<string>YES</string>
 	<key>pluginType</key>
