@@ -14,10 +14,10 @@
 		ABA48A650680BB600089EB4F /* Vol52Filter.h in Headers */ = {isa = PBXBuildFile; fileRef = ABA48A640680BB600089EB4F /* Vol52Filter.h */; };
 		ABA48A670680BB690089EB4F /* Vol52Filter.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA48A660680BB690089EB4F /* Vol52Filter.m */; };
 		BF64317F196D46E8006384EA /* customResultString.txt in Resources */ = {isa = PBXBuildFile; fileRef = BF64317E196D46E8006384EA /* customResultString.txt */; };
+		BFACB341197FBD32006A982B /* EllipsoidVolume.icns in Resources */ = {isa = PBXBuildFile; fileRef = BFACB340197FBD32006A982B /* EllipsoidVolume.icns */; };
 		BFBD5489185DB5C900D73F90 /* Vol52WindowController.h in Headers */ = {isa = PBXBuildFile; fileRef = BFBD5486185DB5C900D73F90 /* Vol52WindowController.h */; };
 		BFBD548A185DB5C900D73F90 /* Vol52WindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBD5487185DB5C900D73F90 /* Vol52WindowController.m */; };
 		BFBD548B185DB5C900D73F90 /* Vol52WindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFBD5488185DB5C900D73F90 /* Vol52WindowController.xib */; };
-		BFBD548D185DB64D00D73F90 /* EllipsoidVolume.png in Resources */ = {isa = PBXBuildFile; fileRef = BFBD548C185DB64D00D73F90 /* EllipsoidVolume.png */; };
 		BFBD5490185DB67500D73F90 /* Vol52RoiManager.h in Headers */ = {isa = PBXBuildFile; fileRef = BFBD548E185DB67500D73F90 /* Vol52RoiManager.h */; };
 		BFBD5491185DB67500D73F90 /* Vol52RoiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBD548F185DB67500D73F90 /* Vol52RoiManager.m */; };
 /* End PBXBuildFile section */
@@ -34,10 +34,10 @@
 		ABA48A640680BB600089EB4F /* Vol52Filter.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Vol52Filter.h; sourceTree = "<group>"; };
 		ABA48A660680BB690089EB4F /* Vol52Filter.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = Vol52Filter.m; sourceTree = "<group>"; };
 		BF64317E196D46E8006384EA /* customResultString.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = customResultString.txt; sourceTree = "<group>"; };
+		BFACB340197FBD32006A982B /* EllipsoidVolume.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = EllipsoidVolume.icns; sourceTree = "<group>"; };
 		BFBD5486185DB5C900D73F90 /* Vol52WindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vol52WindowController.h; sourceTree = "<group>"; };
 		BFBD5487185DB5C900D73F90 /* Vol52WindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Vol52WindowController.m; sourceTree = "<group>"; };
 		BFBD5488185DB5C900D73F90 /* Vol52WindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Vol52WindowController.xib; sourceTree = "<group>"; };
-		BFBD548C185DB64D00D73F90 /* EllipsoidVolume.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = EllipsoidVolume.png; sourceTree = "<group>"; };
 		BFBD548E185DB67500D73F90 /* Vol52RoiManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vol52RoiManager.h; sourceTree = "<group>"; };
 		BFBD548F185DB67500D73F90 /* Vol52RoiManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Vol52RoiManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -80,8 +80,8 @@
 		089C167CFE841241C02AAC07 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				BFACB340197FBD32006A982B /* EllipsoidVolume.icns */,
 				BF64317E196D46E8006384EA /* customResultString.txt */,
-				BFBD548C185DB64D00D73F90 /* EllipsoidVolume.png */,
 				BFBD5488185DB5C900D73F90 /* Vol52WindowController.xib */,
 				8D5B49B7048680CD000E48DA /* Info.plist */,
 				089C167DFE841241C02AAC07 /* InfoPlist.strings */,
@@ -212,9 +212,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				BFBD548B185DB5C900D73F90 /* Vol52WindowController.xib in Resources */,
+				BFACB341197FBD32006A982B /* EllipsoidVolume.icns in Resources */,
 				BF64317F196D46E8006384EA /* customResultString.txt in Resources */,
 				8D5B49B0048680CD000E48DA /* InfoPlist.strings in Resources */,
-				BFBD548D185DB64D00D73F90 /* EllipsoidVolume.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -352,6 +352,7 @@
 				);
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				COMBINE_HIDPI_IMAGES = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				SDKROOT = macosx;
 			};
@@ -366,6 +367,7 @@
 				);
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				COMBINE_HIDPI_IMAGES = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				SDKROOT = macosx;
 			};
