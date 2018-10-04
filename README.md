@@ -1,8 +1,8 @@
-EllipsoidVolume is a OsiriX ROI plugin.
+# EllipsoidVolume is a OsiriX ROI plugin.
 
 The aim of this small plugin is to speedup the radiologist routine when measuring organs like uterus, prostate, bladder etc, automaticaly calculating it's volume.
 
-#Functional Requirements
+## Functional Requirements
 
 Application must:
 - allow user to create three ROIs (Anteroposterior diameter; Longitudinal diameter; Transverse diameter), automatically setting its name and color.
@@ -13,10 +13,8 @@ Application must:
 - allow user to copy results to the pasteboard.
 
 
-#Development Context
+## Development Context
 
 This is my first code. I work as a radiologist and this small project is my first exercise learning Objective-C. There are several parts of this implementation that needs criticisms. I would be glad to receive some feedback because I have no contact with other developers other than OsiriX-Dev malling list.
 
-#My Current Challenges
-
-- I need to understand more about memory management. At this moment I don't know who is responsible to release my plugin after it's window is closed.
+## My Current Challenges
