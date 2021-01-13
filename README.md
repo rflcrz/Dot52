@@ -2,9 +2,7 @@
 
 The aim of this small plugin is to speedup the radiologist routine when measuring organs like uterus, prostate, bladder etc, automaticaly calculating it's volume.
 
-![Usage](EllipsoidVolume-usage.png)
-
-![Configuration](https://github.com/rflcrz/EllipsoidVolume/blob/master/EllipsoidVolume-configuration.png)
+![Configuration](EllipsoidVolume-configuration.png)
 
 ## Functional Requirements
 
@@ -16,6 +14,7 @@ Application must:
     * cavalieri method volume estimation;
 - allow user to copy results to the pasteboard.
 
+![Usage](EllipsoidVolume-usage.png)
 
 ## Help Needed
 
