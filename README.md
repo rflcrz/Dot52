@@ -2,6 +2,8 @@
 
 The aim of this small plugin is to speedup the radiologist routine when measuring organs like uterus, prostate, bladder etc, automaticaly calculating it's volume.
 
+![Configuration](EllipsoidVolume-configuration.png)
+
 ## Functional Requirements
 
 Application must:
@@ -12,9 +14,8 @@ Application must:
     * cavalieri method volume estimation;
 - allow user to copy results to the pasteboard.
 
+![Usage](EllipsoidVolume-usage.png)
 
-## Development Context
+## Help Needed
 
 This is my first code. I work as a radiologist and this small project is my first exercise learning Objective-C. There are several parts of this implementation that needs criticisms. I would be glad to receive some feedback because I have no contact with other developers other than OsiriX-Dev malling list.
-
-## My Current Challenges
